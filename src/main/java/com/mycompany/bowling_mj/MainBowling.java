@@ -42,6 +42,7 @@ public class MainBowling implements bowling.MultiPlayerGame {
     public int scoreFor(String playerName) throws Exception {
         int c =0;
         for(String i : Listenom){
+
             if(i.equals(playerName)){
                 return Listejeux[c].score();
             }
