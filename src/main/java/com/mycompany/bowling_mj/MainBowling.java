@@ -25,20 +25,30 @@ public class MainBowling implements bowling.MultiPlayerGame {
             J[i] = new SinglePlayerGame();
         }
         this.Listejeux = J;
-        return "Prochain tir : joueur"+playerName[0]+" , tour n° 1, boule n° 1";
+        this.Listenom = playerName;
+        return "Prochain tir : joueur "+playerName[0]+" , tour n° 1, boule n° 1";
 
     }
 
     @Override
     public String lancer(int nombreDeQuillesAbattues) throws Exception {
         Listejeux[tourDe].lancer(nombreDeQuillesAbattues);
-        if(Listejeux[tourDe].hasCompletedFrame())
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(Listejeux[tourDe].hasCompletedFrame()){this.tourDe = (tourDe+1)%NombreJ;}
+        return "Prochan tir : joueur "+Listenom[tourDe]+" , tour n° "+Listejeux[tourDe].getFrameNumber()+", boule n°"+Listejeux[tourDe].getNextBallNumber();
+
     }
 
     @Override
     public int scoreFor(String playerName) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int c =0;
+        for(String i : Listenom){
+            if(i.equals(playerName)){
+                return Listejeux[c].score();
+            }
+            c++;
+        }
+        throw new java.lang.Exception("pas ce nom dans le tableau");
+        
     }
     
 }
